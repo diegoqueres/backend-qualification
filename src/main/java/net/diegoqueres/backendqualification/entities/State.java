@@ -137,7 +137,7 @@ public class State implements Serializable {
 	@Override
 	public String toString() {
 		return "State [id=" + id + ", name=" + name + ", stateAbbreviation=" + stateAbbreviation + ", ibge=" + ibge
-				+ ", cities=" + cities + ", country=" + country + "]";
+				+ ", country=" + country + "]";
 	}
 
 
