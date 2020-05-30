@@ -28,6 +28,9 @@ public class State implements Serializable {
 
 	@Column(name = "state_abbreviation", nullable = false)
 	private String stateAbbreviation;
+	
+	@Column(nullable = false)
+	private Integer ibge;
 
 	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
 	private List<City> cities;
@@ -71,6 +74,16 @@ public class State implements Serializable {
 
 	public void setStateAbbreviation(String stateAbbreviation) {
 		this.stateAbbreviation = stateAbbreviation;
+	}
+	
+	
+	public Integer getIbge() {
+		return ibge;
+	}
+
+
+	public void setIbge(Integer ibge) {
+		this.ibge = ibge;
 	}
 
 
@@ -123,9 +136,10 @@ public class State implements Serializable {
 
 	@Override
 	public String toString() {
-		return "State [id=" + id + ", name=" + name + ", stateAbbreviation=" + stateAbbreviation + ", cities=" + cities
-				+ ", country=" + country + "]";
+		return "State [id=" + id + ", name=" + name + ", stateAbbreviation=" + stateAbbreviation + ", ibge=" + ibge
+				+ ", cities=" + cities + ", country=" + country + "]";
 	}
+
 
 	
 

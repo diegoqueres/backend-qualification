@@ -21,7 +21,10 @@ public class City implements Serializable {
 	private Long id;
 
 	@Column(nullable = false)
-	private String nome;
+	private String name;
+	
+	@Column(nullable = false)
+	private Integer ibge;
 
 	@ManyToOne
 	@JoinColumn(name = "state_id", nullable = false)
@@ -43,13 +46,31 @@ public class City implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+
+
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+
+
+	public Integer getIbge() {
+		return ibge;
+	}
+
+
+
+	public void setIbge(Integer ibge) {
+		this.ibge = ibge;
+	}
+
+
 
 	public State getState() {
 		return state;
@@ -84,10 +105,14 @@ public class City implements Serializable {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", nome=" + nome + ", state=" + state + "]";
+		return "City [id=" + id + ", name=" + name + ", ibge=" + ibge + ", state=" + state + "]";
 	}
+
+
 	
 	
 	
