@@ -19,7 +19,7 @@ CREATE TABLE `countries` (
   `name` varchar(60) NOT NULL,
   `name_pt` varchar(60) NOT NULL,
   `country_abbreviation` varchar(2) NULL,
-  `bacen` int(5) NOT NULL
+  `bacen` int(5) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Países e Nações';
 
 --
@@ -302,7 +302,7 @@ CREATE TABLE `states` (
   `name` varchar(75) NOT NULL,
   `state_abbreviation` varchar(2) NOT NULL,
   `ibge` int(2) NOT NULL,
-  `country_id` int(3) NOT NULL,
+  `country_id` int(3) DEFAULT NULL,
   `ddd` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Unidades Federativas';
 
@@ -338,6 +338,7 @@ INSERT INTO `states` (`id`, `name`, `state_abbreviation`, `ibge`, `country_id`, 
 (25, 'Sergipe', 'SE', 28, 1, '79'),
 (26, 'São Paulo', 'SP', 35, 1, '11,12,13,14,15,16,17,18,19'),
 (27, 'Tocantins', 'TO', 17, 1, '63');
+(99, 'Exterior', 'EX', 99, NULL, NULL);
 
 
 --
@@ -5964,6 +5965,7 @@ INSERT INTO `cities` (`id`, `name`, `state_id`, `ibge`) VALUES
 (5607, 'Pinto Bandeira', 23, 4314548),
 (5608, 'Balneário Rincão', 24, 4220000),
 (5609, 'Pescaria Brava', 24, 4212650);
+(5610, 'Exterior', 99, 9999999);
 
 --
 -- Indexes for table "cities"

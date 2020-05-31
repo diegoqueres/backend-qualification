@@ -11,6 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+/**
+ * 
+ * Entidade que representa uma cidade.
+ * 
+ * @author diego
+ *
+ */
 @Entity
 @Table(name = "cities")
 public class City implements Serializable {
@@ -18,7 +26,7 @@ public class City implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Integer id;
 
 	@Column(nullable = false)
 	private String name;
@@ -38,11 +46,11 @@ public class City implements Serializable {
 	
 	
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

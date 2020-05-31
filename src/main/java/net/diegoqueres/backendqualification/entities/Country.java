@@ -13,6 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+/**
+ * 
+ * Entidade que representa um país.
+ * 
+ * @author diego
+ *
+ */
 @Entity
 @Table(name = "countries")
 public class Country implements Serializable {
@@ -20,7 +28,7 @@ public class Country implements Serializable {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)	
-    private Long id;
+    private Integer id;
 
 	@Column(nullable = false)
     private String name;
@@ -35,7 +43,7 @@ public class Country implements Serializable {
     private Integer bacen;
 
     @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
-    private List<State> state;
+    private List<State> states;
 
     
 	/** 
@@ -46,12 +54,12 @@ public class Country implements Serializable {
     
     
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -101,13 +109,13 @@ public class Country implements Serializable {
 
 
 
-	public List<State> getState() {
-		return state;
+	public List<State> getStates() {
+		return states;
 	}
 
 
-	public void setState(List<State> state) {
-		this.state = state;
+	public void setStates(List<State> states) {
+		this.states = states;
 	}
 
 

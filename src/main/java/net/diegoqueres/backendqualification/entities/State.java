@@ -14,6 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+/**
+ * 
+ * Entidade que representa um estado brasileiro.
+ * 
+ * @author diego
+ *
+ */
 @Entity
 @Table(name = "states")
 public class State implements Serializable {
@@ -29,7 +37,7 @@ public class State implements Serializable {
 	@Column(name = "state_abbreviation", nullable = false)
 	private String stateAbbreviation;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer ibge;
 
 	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
@@ -37,7 +45,7 @@ public class State implements Serializable {
 	
 
 	@ManyToOne
-	@JoinColumn(name = "country_id", nullable = false)
+	@JoinColumn(name = "country_id", nullable = true)
 	private Country country;
 	
 	
