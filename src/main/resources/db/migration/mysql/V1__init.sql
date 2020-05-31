@@ -5988,7 +5988,7 @@ DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE `addresses` (
   `id` int NOT NULL,
   `street_name` varchar(255) NOT NULL,
-  `number` int(5) NOT NULL,
+  `number` varchar(20) NOT NULL,
   `complement` varchar(255) DEFAULT NULL,
   `neighbourhood` varchar(255) NOT NULL,
   `city_id` int(11) NOT NULL,

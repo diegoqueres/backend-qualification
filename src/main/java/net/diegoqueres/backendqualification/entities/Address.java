@@ -33,7 +33,7 @@ public class Address implements Serializable {
 	private String streetName;
 
 	@Column(nullable = false)
-	private Integer number;
+	private String number;
 
 	@Column(nullable = true)
 	private String complement;
@@ -75,9 +75,20 @@ public class Address implements Serializable {
 	}
 
 	/**
-	 * Construtor da classe (para testes).
+	 * Construtor da classe com argumentos.
+	 * 
+	 * @param streetName
+	 * @param number
+	 * @param complement
+	 * @param neighbourhood
+	 * @param city
+	 * @param state
+	 * @param country
+	 * @param zipcode
+	 * @param latitude
+	 * @param longitude
 	 */
-	public Address(String streetName, Integer number, String complement, String neighbourhood, City city, State state,
+	public Address(String streetName, String number, String complement, String neighbourhood, City city, State state,
 			Country country, String zipcode, Double latitude, Double longitude) {
 		this.streetName = streetName;
 		this.number = number;
@@ -107,11 +118,11 @@ public class Address implements Serializable {
 		this.streetName = streetName;
 	}
 
-	public Integer getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
