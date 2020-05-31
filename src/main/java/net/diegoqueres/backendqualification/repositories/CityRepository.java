@@ -10,7 +10,7 @@ import net.diegoqueres.backendqualification.entities.City;
 import net.diegoqueres.backendqualification.entities.State;
 
 /**
- * Respositório da entidade City (Cidade).
+ * Repositório da entidade City (Cidade).
  * 
  * @author diego
  *

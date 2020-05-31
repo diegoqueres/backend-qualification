@@ -10,7 +10,7 @@ import net.diegoqueres.backendqualification.entities.Country;
 import net.diegoqueres.backendqualification.entities.State;
 
 /**
- * Respositório da entidade State (Estado).
+ * Repositório da entidade State (Estado).
  * 
  * @author diego
  *

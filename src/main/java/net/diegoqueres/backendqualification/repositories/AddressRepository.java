@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import net.diegoqueres.backendqualification.entities.Address;
 
 /**
- * Respositório da entidade Address (Endereço).
+ * Repositório da entidade Address (Endereço).
  * 
  * @author diego
  *

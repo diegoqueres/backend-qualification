@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import net.diegoqueres.backendqualification.entities.Country;
 
 /**
- * Respositório da entidade Country (País).
+ * Repositório da entidade Country (País).
  * 
  * @author diego
  *
