@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 /**
  * 
  * Entidade que representa uma cidade.
@@ -30,21 +29,19 @@ public class City implements Serializable {
 
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private Integer ibge;
 
 	@ManyToOne
 	@JoinColumn(name = "state_id", nullable = false)
-	private State state;	
-	
-	
-	/** 
-	* Construtor da classe.
-	*/
-	public City() {}
-	
-	
+	private State state;
+
+	/**
+	 * Construtor da classe.
+	 */
+	public City() {
+	}
 
 	public Integer getId() {
 		return id;
@@ -54,31 +51,21 @@ public class City implements Serializable {
 		this.id = id;
 	}
 
-
-
 	public String getName() {
 		return name;
 	}
-
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-
 	public Integer getIbge() {
 		return ibge;
 	}
 
-
-
 	public void setIbge(Integer ibge) {
 		this.ibge = ibge;
 	}
-
-
 
 	public State getState() {
 		return state;
@@ -113,16 +100,9 @@ public class City implements Serializable {
 		return true;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "City [id=" + id + ", name=" + name + ", ibge=" + ibge + ", state=" + state + "]";
 	}
 
-
-	
-	
-	
-	
 }

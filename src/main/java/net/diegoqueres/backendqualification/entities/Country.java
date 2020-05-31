@@ -9,10 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 /**
  * 
@@ -27,98 +25,77 @@ public class Country implements Serializable {
 	private static final long serialVersionUID = 899324165291800664L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)	
-    private Integer id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	@Column(nullable = false)
-    private String name;
+	private String name;
 
-    @Column(nullable = false)
-    private String name_pt;    
+	@Column(nullable = false)
+	private String name_pt;
 
-    @Column(name = "country_abbreviation", nullable = false)
-    private String countryAbbreviation;
-    
-    @Column(nullable = false)
-    private Integer bacen;
+	@Column(name = "country_abbreviation", nullable = false)
+	private String countryAbbreviation;
 
-    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
-    private List<State> states;
+	@Column(nullable = false)
+	private Integer bacen;
 
-    
-	/** 
-	* Construtor da classe.
-	*/
-    public Country() {}
-    
-    
-    
+	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+	private List<State> states;
+
+	/**
+	 * Construtor da classe.
+	 */
+	public Country() {
+	}
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
 
 	public String getName_pt() {
 		return name_pt;
 	}
 
-
 	public void setName_pt(String name_pt) {
 		this.name_pt = name_pt;
 	}
-
-
 
 	public String getCountryAbbreviation() {
 		return countryAbbreviation;
 	}
 
-
 	public void setCountryAbbreviation(String countryAbbreviation) {
 		this.countryAbbreviation = countryAbbreviation;
 	}
-
-
 
 	public Integer getBacen() {
 		return bacen;
 	}
 
-
 	public void setBacen(Integer bacen) {
 		this.bacen = bacen;
 	}
-
-
 
 	public List<State> getStates() {
 		return states;
 	}
 
-
 	public void setStates(List<State> states) {
 		this.states = states;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -145,18 +122,10 @@ public class Country implements Serializable {
 		return true;
 	}
 
-
-
-
-
 	@Override
 	public String toString() {
 		return "Country [id=" + id + ", name=" + name + ", name_pt=" + name_pt + ", countryAbbreviation="
 				+ countryAbbreviation + ", bacen=" + bacen + "]";
 	}
 
-
-    
 }
-
-

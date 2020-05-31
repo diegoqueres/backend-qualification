@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  * 
  * Entidade que representa um estado brasileiro.
@@ -29,91 +28,77 @@ public class State implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
+	private Integer id;
+
 	@Column(nullable = false)
 	private String name;
 
 	@Column(name = "state_abbreviation", nullable = false)
 	private String stateAbbreviation;
-	
+
 	@Column(nullable = true)
 	private Integer ibge;
 
 	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
 	private List<City> cities;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "country_id", nullable = true)
 	private Country country;
-	
-	
-	/** 
-	* Construtor da classe.
-	*/
-	public State() {}
 
+	/**
+	 * Construtor da classe.
+	 */
+	public State() {
+	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getStateAbbreviation() {
 		return stateAbbreviation;
 	}
 
-
 	public void setStateAbbreviation(String stateAbbreviation) {
 		this.stateAbbreviation = stateAbbreviation;
 	}
-	
-	
+
 	public Integer getIbge() {
 		return ibge;
 	}
-
 
 	public void setIbge(Integer ibge) {
 		this.ibge = ibge;
 	}
 
-
 	public List<City> getCities() {
 		return cities;
 	}
-
 
 	public void setCities(List<City> cities) {
 		this.cities = cities;
 	}
 
-
 	public Country getCountry() {
 		return country;
 	}
 
-
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -122,7 +107,6 @@ public class State implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -141,14 +125,10 @@ public class State implements Serializable {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "State [id=" + id + ", name=" + name + ", stateAbbreviation=" + stateAbbreviation + ", ibge=" + ibge
 				+ ", country=" + country + "]";
 	}
-
-
-	
 
 }

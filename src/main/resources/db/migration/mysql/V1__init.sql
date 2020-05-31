@@ -337,7 +337,7 @@ INSERT INTO `states` (`id`, `name`, `state_abbreviation`, `ibge`, `country_id`, 
 (24, 'Santa Catarina', 'SC', 42, 1, '47,48,49'),
 (25, 'Sergipe', 'SE', 28, 1, '79'),
 (26, 'São Paulo', 'SP', 35, 1, '11,12,13,14,15,16,17,18,19'),
-(27, 'Tocantins', 'TO', 17, 1, '63');
+(27, 'Tocantins', 'TO', 17, 1, '63'),
 (99, 'Exterior', 'EX', 99, NULL, NULL);
 
 
@@ -5964,7 +5964,7 @@ INSERT INTO `cities` (`id`, `name`, `state_id`, `ibge`) VALUES
 (5606, 'Paraíso das Águas', 12, 5006275),
 (5607, 'Pinto Bandeira', 23, 4314548),
 (5608, 'Balneário Rincão', 24, 4220000),
-(5609, 'Pescaria Brava', 24, 4212650);
+(5609, 'Pescaria Brava', 24, 4212650),
 (5610, 'Exterior', 99, 9999999);
 
 --
@@ -5994,9 +5994,11 @@ CREATE TABLE `addresses` (
   `city_id` int(11) NOT NULL,
   `state_id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL,
-  `zipcode` char(5) NOT NULL,
-  `latitute` double DEFAULT NULL,
-  `longitude` double DEFAULT NULL
+  `zipcode` char(8) NOT NULL,
+  `latitude` double DEFAULT NULL,
+  `longitude` double DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Endereços gravados pela API';
 
 ALTER TABLE `addresses` 
