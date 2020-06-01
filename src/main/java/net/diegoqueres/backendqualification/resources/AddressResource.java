@@ -114,8 +114,8 @@ public class AddressResource {
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<AddressDTO> update(@PathVariable Integer id, @Valid @RequestBody AddressDTO addressDto,
 			BindingResult result) {
-		Address address = addressService.fromDto(addressDto);
-		addressService.update(id, address);
+		Address address = addressService.update(id, addressService.fromDto(addressDto));
+		addressDto = new AddressDTO(address);
 		return ResponseEntity.ok().body(addressDto);
 	}
 
