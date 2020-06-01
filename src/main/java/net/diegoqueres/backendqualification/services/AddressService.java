@@ -79,6 +79,10 @@ public class AddressService {
 		}
 	}
 
+	public List<Address> findAllByCountryId(Integer countryId) {
+		return repository.findAllByCountryId(countryId);
+	}
+
 	private void updateData(Address entity, Address obj) {
 		entity.setStreetName(obj.getStreetName());
 		entity.setNumber(obj.getNumber());
