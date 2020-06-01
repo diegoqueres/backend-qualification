@@ -38,10 +38,18 @@ public class City implements Serializable {
 	private State state;
 
 	/**
-	 * Construtor da classe.
+	 * Construtor padrão da classe.
 	 */
 	public City() {
 	}
+	
+	/**
+	 * Construtor da classe.
+	 * @param id
+	 */
+	public City(Integer id) {
+		this.id = id;
+	}	
 
 	public Integer getId() {
 		return id;

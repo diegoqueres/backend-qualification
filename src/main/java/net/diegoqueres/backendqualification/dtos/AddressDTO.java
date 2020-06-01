@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import net.diegoqueres.backendqualification.entities.Address;
 
 /**
@@ -19,16 +22,24 @@ import net.diegoqueres.backendqualification.entities.Address;
 public class AddressDTO implements Serializable {
 	private static final long serialVersionUID = -4398537102909994482L;
 
+	@JsonInclude(Include.NON_EMPTY)
 	private Optional<Integer> id = Optional.empty();
+	
 	private String streetName;
 	private String number;
+
+	@JsonInclude(Include.NON_NULL)
 	private String complement;
 	private String neighbourhood;
 	private Integer city;
 	private Integer state;
 	private Integer country;
 	private String zipcode;
+
+	@JsonInclude(Include.NON_NULL)
 	private Double latitude;
+
+	@JsonInclude(Include.NON_NULL)
 	private Double longitude;
 
 	/**

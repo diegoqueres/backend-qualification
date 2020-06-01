@@ -1,8 +1,10 @@
 package net.diegoqueres.backendqualification.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,13 +47,20 @@ public class Country implements Serializable {
 	private Integer bacen;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<State> states;
+
+	/**
+	 * Construtor padrão da classe.
+	 */
+	public Country() {
+	}
 
 	/**
 	 * Construtor da classe.
 	 */
-	public Country() {
+	public Country(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getId() {
@@ -95,6 +104,8 @@ public class Country implements Serializable {
 	}
 
 	public List<State> getStates() {
+		if (states == null)
+			setStates(new ArrayList<>());
 		return states;
 	}
 

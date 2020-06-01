@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -51,6 +52,20 @@ public class AddressResource {
 	public ResponseEntity<List<AddressDTO>> findAll() {
 		log.info("Recuperando lista de todos os endereços");
 		List<Address> list = addressService.findAll();
+		List<AddressDTO> listDto = list.stream().map(x -> new AddressDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+
+	/**
+	 * Retorna uma lista de endereços, de acordo com um dado código de país.
+	 * 
+	 * @return ResponseEntity<List<AddressDTO>>
+	 */
+	@GetMapping(value = "/search")
+	public ResponseEntity<List<AddressDTO>> findAllByCountryId(
+			@RequestParam(value = "country", defaultValue = "") Integer countryId) {
+		log.info("Recuperando lista de todos os endereços do código de país {}", countryId);
+		List<Address> list = addressService.findAllByCountryId(countryId);
 		List<AddressDTO> listDto = list.stream().map(x -> new AddressDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
