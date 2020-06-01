@@ -1,16 +1,30 @@
 package net.diegoqueres.backendqualification.services;
 
+import static net.diegoqueres.backendqualification.constants.ExternalConstants.GEOCODING_API_KEY;
+import static net.diegoqueres.backendqualification.constants.ExternalConstants.GEOCODING_URL;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.diegoqueres.backendqualification.dtos.AddressDTO;
 import net.diegoqueres.backendqualification.entities.Address;
@@ -33,6 +47,7 @@ import net.diegoqueres.backendqualification.services.exceptions.ResourceNotFound
  */
 @Service
 public class AddressService {
+	private static final Logger log = LoggerFactory.getLogger(AddressService.class);
 
 	@Autowired
 	private AddressRepository repository;
@@ -46,6 +61,26 @@ public class AddressService {
 	@Autowired
 	private CountryRepository countryRepo;
 
+	private final RestTemplate restTemplate;
+
+	private ObjectMapper objectMapper;
+
+	/**
+	 * Construtor da classe AddressService.
+	 * 
+	 * @param restTemplateBuilder
+	 */
+	public AddressService(RestTemplateBuilder restTemplateBuilder) {
+		this.restTemplate = restTemplateBuilder.build();
+		this.objectMapper = new ObjectMapper();
+		configObjectMapper();
+	}
+
+	private void configObjectMapper() {
+		this.objectMapper = this.objectMapper.disable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS)
+				.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);
+	}
+
 	public List<Address> findAll() {
 		return repository.findAll();
 	}
@@ -55,8 +90,11 @@ public class AddressService {
 		return obj.get();
 	}
 
-	public Address insert(Address obj) {
-		return repository.save(obj);
+	public Address insert(Address entity) {
+		if (entity.getLatitude() == null && entity.getLongitude() == null)
+			entity = configEmptyGeometryLocation(entity);
+
+		return repository.save(entity);
 	}
 
 	public void delete(Integer id) {
@@ -73,6 +111,10 @@ public class AddressService {
 		try {
 			Address entity = repository.getOne(id);
 			updateData(entity, obj);
+
+			if (entity.getLatitude() == null && entity.getLongitude() == null)
+				entity = configEmptyGeometryLocation(entity);
+
 			return repository.save(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
@@ -94,6 +136,46 @@ public class AddressService {
 		entity.setZipcode(obj.getZipcode());
 		entity.setLatitude(obj.getLatitude());
 		entity.setLongitude(obj.getLongitude());
+	}
+
+	private Address configEmptyGeometryLocation(Address entity) {
+		try {
+			var url = String.format(GEOCODING_URL, entity.getNumber(), entity.getStreetName(),
+					entity.getNeighbourhood(), entity.getCity().getName(), entity.getCountry().getName(),
+					GEOCODING_API_KEY);
+			var response = this.restTemplate.getForObject(url, String.class);
+			JsonNode root = objectMapper.readTree(response);
+
+			var resultsNode = root.path("results");
+			if (resultsNode.isArray()) {
+				for (JsonNode node : resultsNode) {
+					var geometryNode = node.path("geometry");
+					if (!geometryNode.isMissingNode()) {
+						var location = geometryNode.path("location");
+						if (!location.isMissingNode()) {
+							var lat = location.path("lat");
+							var lng = location.path("lng");
+							if (!lat.isMissingNode()) {
+								log.info("Latitude detectada: {}", lat.asDouble());
+								entity.setLatitude(lat.asDouble());
+							}
+							if (!lng.isMissingNode()) {
+								log.info("Longitude detectada: {}", lng.asDouble());
+								entity.setLongitude(lng.asDouble());
+							}
+						}
+					}
+				}
+			}
+
+		} catch (RestClientException e) {
+			log.error("Erro ao acessar a API de Geocoding do Google: {}", e.getLocalizedMessage());
+		} catch (JsonProcessingException e) {
+			log.error("Erro ao processar JSON retornado da API de Geocoding do Google: {}", e.getLocalizedMessage());
+		}
+
+		return entity;
+
 	}
 
 	public Address fromDto(AddressDTO dto) {
