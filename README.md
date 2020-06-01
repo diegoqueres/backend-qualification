@@ -21,8 +21,7 @@ git clone https://github.com/diegoqueres/backend-qualification.git
 
 #### Rode os comandos para criar a imagem do Docker
 ```
-docker build -f Dockerfile -t backend-qualification
-
+docker build -f Dockerfile -t backend-qualification .
 docker images
 docker run -p 8085:8085 backend-qualification
 ```
