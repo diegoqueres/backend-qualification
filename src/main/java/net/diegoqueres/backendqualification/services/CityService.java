@@ -13,7 +13,7 @@ import net.diegoqueres.backendqualification.repositories.CityRepository;
 /**
  * Classe Service da entidade City (Cidade).
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Service

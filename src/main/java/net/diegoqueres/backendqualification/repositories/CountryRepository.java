@@ -8,7 +8,7 @@ import net.diegoqueres.backendqualification.entities.Country;
 /**
  * Repositório da entidade Country (País).
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Repository

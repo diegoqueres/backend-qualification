@@ -20,7 +20,7 @@ import net.diegoqueres.backendqualification.services.CountryService;
  * suporte para consultar a base de dados de países, para consultar seus
  * códigos, que são usados no cadastro de endereços.
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @RestController

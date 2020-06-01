@@ -7,7 +7,7 @@ import org.springframework.validation.ObjectError;
 /**
  * Representa erros de validação capturados quando a API recebe o objeto DTO.
  * 
- * @author Diego Queres
+ * @author Diego Queres Queres
  *
  */
 public class ValidationException extends RuntimeException {

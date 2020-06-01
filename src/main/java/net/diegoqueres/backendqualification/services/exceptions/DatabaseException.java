@@ -3,7 +3,7 @@ package net.diegoqueres.backendqualification.services.exceptions;
 /**
  * Exceções decorrentes de operações no banco de dados.
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 public class DatabaseException extends RuntimeException {

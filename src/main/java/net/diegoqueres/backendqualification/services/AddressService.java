@@ -28,7 +28,7 @@ import net.diegoqueres.backendqualification.services.exceptions.ResourceNotFound
 /**
  * Classe Service da entidade Address (Endereço).
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Service

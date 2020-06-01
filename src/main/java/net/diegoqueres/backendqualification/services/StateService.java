@@ -13,7 +13,7 @@ import net.diegoqueres.backendqualification.repositories.StateRepository;
 /**
  * Classe Service da entidade State (Estado).
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Service

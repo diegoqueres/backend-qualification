@@ -12,7 +12,7 @@ import net.diegoqueres.backendqualification.repositories.CountryRepository;
 /**
  * Classe Service da entidade Country (País).
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Service

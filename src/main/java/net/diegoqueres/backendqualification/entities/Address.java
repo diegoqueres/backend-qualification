@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * Entidade que representa um endereço físico.
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Entity

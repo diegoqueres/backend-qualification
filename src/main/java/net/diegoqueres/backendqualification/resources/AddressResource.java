@@ -30,7 +30,7 @@ import net.diegoqueres.backendqualification.services.AddressService;
 /**
  * Controller para CRUD da entidade Address (Endereço).
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @RestController

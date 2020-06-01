@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * Entidade que representa um país.
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Entity

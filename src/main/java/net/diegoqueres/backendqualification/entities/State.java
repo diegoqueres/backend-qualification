@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * Entidade que representa um estado brasileiro.
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Entity

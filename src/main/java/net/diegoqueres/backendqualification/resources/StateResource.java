@@ -23,7 +23,7 @@ import net.diegoqueres.backendqualification.services.StateService;
  * suporte para consultar a base de dados de estados, para consultar seus
  * códigos, que são usados no cadastro de endereços.
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @RestController

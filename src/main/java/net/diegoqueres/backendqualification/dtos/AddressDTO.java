@@ -13,7 +13,7 @@ import net.diegoqueres.backendqualification.entities.Address;
 /**
  * DTO da entidade Address (Endereço).
  * 
- * @author Diego Queres
+ * @author Diego Queres Queres
  *
  */
 public class AddressDTO implements Serializable {

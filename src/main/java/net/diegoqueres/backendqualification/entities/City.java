@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * 
  * Entidade que representa uma cidade.
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Entity

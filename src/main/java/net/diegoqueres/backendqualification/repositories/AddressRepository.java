@@ -8,7 +8,7 @@ import net.diegoqueres.backendqualification.entities.Address;
 /**
  * Repositório da entidade Address (Endereço).
  * 
- * @author diego
+ * @author Diego Queres
  *
  */
 @Repository
