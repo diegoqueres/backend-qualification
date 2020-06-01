@@ -1,8 +1,8 @@
 package net.diegoqueres.backendqualification.services.exceptions;
 
 /**
- * Exceção decorrente de operações que dependem da existência da entidade para rodar. 
- * Mas não foram localizadas ocorrências para prosseguir.
+ * Exceção decorrente de operações que dependem da existência da entidade para
+ * rodar. Mas não foram localizadas ocorrências para prosseguir.
  * 
  * @author diego
  *

@@ -1,5 +1,6 @@
 package net.diegoqueres.backendqualification.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.ObjectError;
 
+import net.diegoqueres.backendqualification.dtos.AddressDTO;
 import net.diegoqueres.backendqualification.entities.Address;
+import net.diegoqueres.backendqualification.entities.City;
+import net.diegoqueres.backendqualification.entities.Country;
+import net.diegoqueres.backendqualification.entities.State;
 import net.diegoqueres.backendqualification.repositories.AddressRepository;
+import net.diegoqueres.backendqualification.repositories.CityRepository;
+import net.diegoqueres.backendqualification.repositories.CountryRepository;
+import net.diegoqueres.backendqualification.repositories.StateRepository;
+import net.diegoqueres.backendqualification.resources.exceptions.ValidationException;
 import net.diegoqueres.backendqualification.services.exceptions.DatabaseException;
 import net.diegoqueres.backendqualification.services.exceptions.ResourceNotFoundException;
 
@@ -26,6 +36,15 @@ public class AddressService {
 
 	@Autowired
 	private AddressRepository repository;
+
+	@Autowired
+	private CityRepository cityRepo;
+
+	@Autowired
+	private StateRepository stateRepo;
+
+	@Autowired
+	private CountryRepository countryRepo;
 
 	public List<Address> findAll() {
 		return repository.findAll();
@@ -71,6 +90,33 @@ public class AddressService {
 		entity.setZipcode(obj.getZipcode());
 		entity.setLatitude(obj.getLatitude());
 		entity.setLongitude(obj.getLongitude());
+	}
+
+	public Address fromDto(AddressDTO dto) {
+		Optional<City> city = cityRepo.findById(dto.getCity());
+		Optional<State> state = stateRepo.findById(dto.getState());
+		Optional<Country> country = countryRepo.findById(dto.getCountry());
+
+		validateMandatoryEntities(city, state, country);
+
+		return new Address(dto.getStreetName(), dto.getNumber(), dto.getComplement(), dto.getNeighbourhood(), city,
+				state, country, dto.getZipcode(), dto.getLatitude(), dto.getLongitude());
+
+	}
+
+	private void validateMandatoryEntities(Optional<City> city, Optional<State> state, Optional<Country> country) {
+		List<ObjectError> errorList = new ArrayList<>();
+		if (city.isEmpty())
+			errorList.add(new ObjectError("City", "City not found"));
+		if (state.isEmpty())
+			errorList.add(new ObjectError("State", "State not found"));
+		if (country.isEmpty())
+			errorList.add(new ObjectError("Country", "Country not found"));
+
+		if (!errorList.isEmpty()) {
+			throw new ValidationException(errorList);
+		}
+
 	}
 
 }

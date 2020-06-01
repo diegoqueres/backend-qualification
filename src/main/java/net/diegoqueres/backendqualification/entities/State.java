@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 
  * Entidade que representa um estado brasileiro.
@@ -33,12 +36,14 @@ public class State implements Serializable {
 	@Column(nullable = false)
 	private String name;
 
+	@JsonProperty("state_abbreviation")
 	@Column(name = "state_abbreviation", nullable = false)
 	private String stateAbbreviation;
 
 	@Column(nullable = true)
 	private Integer ibge;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
 	private List<City> cities;
 

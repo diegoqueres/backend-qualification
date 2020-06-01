@@ -2,6 +2,7 @@ package net.diegoqueres.backendqualification.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Entidade que representa um endereço físico.
@@ -62,9 +65,11 @@ public class Address implements Serializable {
 	@Column(nullable = true)
 	private Double longitude;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	@Column(name = "created_at", nullable = false)
 	private Instant createdAt;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	@Column(name = "updated_at", nullable = false)
 	private Instant updatedAt;
 
@@ -88,15 +93,15 @@ public class Address implements Serializable {
 	 * @param latitude
 	 * @param longitude
 	 */
-	public Address(String streetName, String number, String complement, String neighbourhood, City city, State state,
-			Country country, String zipcode, Double latitude, Double longitude) {
+	public Address(String streetName, String number, String complement, String neighbourhood, Optional<City> city, Optional<State> state,
+			Optional<Country> country, String zipcode, Double latitude, Double longitude) {
 		this.streetName = streetName;
 		this.number = number;
 		this.complement = complement;
 		this.neighbourhood = neighbourhood;
-		this.city = city;
-		this.state = state;
-		this.country = country;
+		this.city = city.get();
+		this.state = state.get();
+		this.country = country.get();
 		this.zipcode = zipcode;
 		this.latitude = latitude;
 		this.longitude = longitude;

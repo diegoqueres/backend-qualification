@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 
  * Entidade que representa um país.
@@ -34,12 +37,14 @@ public class Country implements Serializable {
 	@Column(nullable = false)
 	private String name_pt;
 
+	@JsonProperty("country_abbreviation")
 	@Column(name = "country_abbreviation", nullable = false)
 	private String countryAbbreviation;
 
 	@Column(nullable = false)
 	private Integer bacen;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	private List<State> states;
 
